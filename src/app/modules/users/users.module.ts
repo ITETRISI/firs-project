@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FirstComponent } from './first/first.component';
 import { MatButtonModule} from '@angular/material/button';
 import { MatCardModule} from '@angular/material/card';
+import { UsersListShellComponent } from './containers/users-list-shell/users-list-shell.component';
 
 
 @NgModule({
   declarations: [
-    FirstComponent
+    UsersListShellComponent
   ],
   imports: [
     CommonModule,
@@ -15,7 +15,7 @@ import { MatCardModule} from '@angular/material/card';
     MatCardModule
   ],
   exports:[
-    FirstComponent
+    UsersListShellComponent
   ]
 })
-export class ModuleFirstModule { }
+export class UsersModule { }

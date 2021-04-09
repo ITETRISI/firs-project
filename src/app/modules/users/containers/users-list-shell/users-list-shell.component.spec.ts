@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThirdComponent } from './third.component';
+import { UsersListShellComponent } from './users-list-shell.component';
 
-describe('ThirdComponent', () => {
-  let component: ThirdComponent;
-  let fixture: ComponentFixture<ThirdComponent>;
+describe('UsersListShellComponent', () => {
+  let component: UsersListShellComponent;
+  let fixture: ComponentFixture<UsersListShellComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ThirdComponent ]
+      declarations: [ UsersListShellComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ThirdComponent);
+    fixture = TestBed.createComponent(UsersListShellComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

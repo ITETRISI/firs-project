@@ -1,16 +1,16 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-first',
-  templateUrl: './first.component.html',
-  styleUrls: ['./first.component.scss']
+  selector: 'app-users-list-shell',
+  templateUrl: './users-list-shell.component.html',
+  styleUrls: ['./users-list-shell.component.scss']
 })
-export class FirstComponent implements OnInit {
+export class UsersListShellComponent implements OnInit {
 
-  constructor() {}
+  constructor() { }
+
+  ngOnInit(): void {
+  }
 
   hide: boolean = true;
   users: IUser[] = [{
@@ -34,10 +34,6 @@ export class FirstComponent implements OnInit {
       gender: true
     }
   ]
-
-  ngOnInit(): void {
-    console.log(this.users)
-  }
 
   changeGender(i:number):void{
     this.users[i].gender = !this.users[i].gender;
