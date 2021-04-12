@@ -2,8 +2,6 @@ import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/
 import { CardComponent } from 'src/app/modules/shared/components/card/card.component';
 import { IUser, UsersService } from 'src/app/services/users/users.service';
 
-
-
 @Component({
   selector: 'app-users-list-shell',
   templateUrl: './users-list-shell.component.html',
@@ -11,7 +9,7 @@ import { IUser, UsersService } from 'src/app/services/users/users.service';
 })
 
 export class UsersListShellComponent implements OnInit {
-  
+
   @ViewChildren(CardComponent) cardComponents : QueryList<CardComponent>;
 
   constructor(private userService: UsersService) { }

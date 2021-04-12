@@ -1,4 +1,3 @@
-import { typeSourceSpan } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IUser } from 'src/app/services/users/users.service';
 
@@ -9,6 +8,7 @@ import { IUser } from 'src/app/services/users/users.service';
 })
 export class CardComponent implements OnInit {
   @Input() user: IUser;
+  @Input() hide: boolean;
   @Output() changeGenderEvent = new EventEmitter<IUser>();
 
 
