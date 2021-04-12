@@ -1,16 +1,9 @@
 <div class="wrapper">
-    <div class="cards">
-      <ng-container *ngFor="let user of users; index as i">
-        <mat-card class="card" *ngIf="!user.gender || hide ">
-          <span class="card__name">{{user.name}}</span>
-          <span class="card__age">{{user.age}}</span>
-          <div class="card__action">
-            <span class="card__gender">{{user.gender ? 'male' : 'female'}}</span>
-            <button mat-raised-button color="primary" (click)="changeGender(i)">Change gender</button>
-          </div>
-        </mat-card>
-      </ng-container>
-    </div>
-    
-    <button mat-raised-button color="warn" (click)="hideMale()">Hide all male</button>
+  <div class="cards">
+    <ng-container *ngFor="let user of users; index as i">
+      <app-card [user]="user" (changeGenderEvent)="changeUserGender($event)"></app-card>
+    </ng-container>
   </div>
+  <button mat-raised-button color="warn" (click)="hideMale()">Hide all male</button>
+  <button mat-raised-button color="warn" (click)="activeAllUsers()">Active All</button>
+</div>

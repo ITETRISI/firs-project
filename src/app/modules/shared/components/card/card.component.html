@@ -1,1 +1,9 @@
-<p>card works!</p>
+<mat-card class="card" >
+    <span class="card__name">{{user.name}}</span>
+    <span class="card__age">{{user.age}}</span>
+    <div class="card__action">
+      <span class="card__gender">{{user.gender ? 'male' : 'female'}}</span>
+      <button mat-raised-button color="primary" (click)="changeGender()">Change gender</button>
+    </div>
+    <mat-checkbox class="example-margin" [color]="'primary'" [checked] = "user.active" (change)="activateUser()" [disabled]="user.age > 18 ? false : true">Active user</mat-checkbox>
+</mat-card>

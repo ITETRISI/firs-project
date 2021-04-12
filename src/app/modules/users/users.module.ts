@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule} from '@angular/material/button';
 import { MatCardModule} from '@angular/material/card';
 import { UsersListShellComponent } from './containers/users-list-shell/users-list-shell.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { UsersListShellComponent } from './containers/users-list-shell/users-lis
   imports: [
     CommonModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    SharedModule
   ],
   exports:[
     UsersListShellComponent
