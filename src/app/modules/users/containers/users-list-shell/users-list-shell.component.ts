@@ -1,6 +1,6 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { CardComponent } from 'src/app/modules/shared/components/card/card.component';
-import { IUser, UsersService } from 'src/app/modules/users/containers/users/users.service';
+import { IUser, UsersService } from 'src/app/modules/users/services/users/users.service';
 
 @Component({
   selector: 'app-users-list-shell',
