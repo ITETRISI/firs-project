@@ -1,15 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IUser } from 'src/app/services/users/users.service';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { IUser } from 'src/app/modules/users/containers/users/users.service';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
   @Input() user: IUser;
   @Input() hide: boolean;
-  @Output() changeGenderEvent = new EventEmitter<IUser>();
 
 
   valueCheckbox: boolean;
@@ -18,10 +17,6 @@ export class CardComponent implements OnInit {
 
   ngOnInit(): void {
 
-  }
-
-  changeGender(): void {
-    this.changeGenderEvent.emit(this.user);
   }
 
   activateUser(): void{

@@ -1,11 +1,12 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { CardComponent } from 'src/app/modules/shared/components/card/card.component';
-import { IUser, UsersService } from 'src/app/services/users/users.service';
+import { IUser, UsersService } from 'src/app/modules/users/containers/users/users.service';
 
 @Component({
   selector: 'app-users-list-shell',
   templateUrl: './users-list-shell.component.html',
-  styleUrls: ['./users-list-shell.component.scss']
+  styleUrls: ['./users-list-shell.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class UsersListShellComponent implements OnInit {
@@ -24,11 +25,6 @@ export class UsersListShellComponent implements OnInit {
 
   hideMale(): void {
     this.hide = !this.hide;
-  }
-
-  changeUserGender(user: IUser) {
-    user.gender = !user.gender
-    console.log(this.users)
   }
 
   activeAllUsers(){

@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="cards">
     <ng-container *ngFor="let user of users; index as i">
-      <app-card [user]="user" [hide]="hide" (changeGenderEvent)="changeUserGender($event)"></app-card>
+      <app-card [user]="user" [hide]="hide"></app-card>
     </ng-container>
   </div>
   <button mat-raised-button color="warn" (click)="hideMale()">{{hide ? 'Hide all male' : 'Show male'}}</button>
