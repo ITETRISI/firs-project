@@ -1,0 +1,31 @@
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 5px 10px 0 rgb(0 64 128 / 5%);
+    background-color: #fff;
+    height: 50px;
+}
+
+.nav{
+
+    &__menu{
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__item {
+        list-style: none;
+        margin: 0 15px;
+        font-size: 19px;
+    }
+
+    &__link{
+        text-decoration: none;
+        color: #000;
+    }
+}
