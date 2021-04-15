@@ -1,6 +1,9 @@
-<mat-card class="card" *ngIf="!user.gender || hide">
-    <span class="card__name">{{user.firstName}}</span>
-    <span class="card__age">{{user.age}}</span>
-    <span class="card__gender">{{user.gender ? 'male' : 'female'}}</span>
-    <!-- <mat-checkbox class="example-margin" [color]="'primary'" [checked] = "user.active" (change)="activateUser()" [disabled]="user.age > 18 ? false : true">Active user</mat-checkbox> -->
+<mat-card class="card" *ngIf="user.gender != 'male' || hide">
+    <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
+    <span class="card__info"><b>Age :</b> {{user.age}}</span>
+    <span class="card__info"><b>Gender :</b> {{user.gender}}</span>
+    <span class="card__info"><b>Company :</b> {{user.company}}</span>
+    <span class="card__info"><b>Departament :</b> {{user.departament}}</span>
+    <span class="card__info"><b>Email :</b> {{user.email}}</span>
+    <mat-checkbox class="example-margin" [color]="'primary'" [checked] = "user.active" (change)="activateUser()" [disabled]="user.active || user.age < 18 ? true : false">Active user</mat-checkbox>
 </mat-card>

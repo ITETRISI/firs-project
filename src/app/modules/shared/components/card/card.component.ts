@@ -1,5 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { IUser } from 'src/app/modules/users/services/users/users.service';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import {
+  IUser
+} from 'src/app/modules/users/services/users/users.service';
 
 @Component({
   selector: 'app-card',
@@ -9,18 +17,18 @@ import { IUser } from 'src/app/modules/users/services/users/users.service';
 export class CardComponent implements OnInit {
   @Input() user: IUser;
   @Input() hide: boolean;
-
+  @Output() changeActive: EventEmitter < boolean > = new EventEmitter < boolean > ();
 
   valueCheckbox: boolean;
-  
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor() {}
 
-  }
+  ngOnInit(): void {}
 
-  activateUser(): void{
-    this.user.active = !this.user.active;
+  activateUser(): void {
+    if(this.user.age > 18 && !this.user.active){
+      this.changeActive.emit(!this.user.active);
+    }
   }
 
 }

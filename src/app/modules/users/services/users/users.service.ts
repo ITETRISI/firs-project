@@ -7,7 +7,8 @@ export interface IUser {
   departament: string,
   age: number,
   gender: string,
-  active?: boolean,
+  email: string,
+  active: boolean,
 }
 
 @Injectable({
@@ -15,17 +16,21 @@ export interface IUser {
 })
 export class UsersService {
 
-  users: IUser[] = [];
+  users: IUser[] = JSON.parse(localStorage.getItem('users') || '[]');
 
   constructor() { }
 
   getUsers(): IUser[]{
-    this.users = JSON.parse(localStorage.getItem('users') || '[]');
     return this.users
   }
 
   saveUser(user: IUser): void{
     this.users.push(user)
     localStorage.setItem('users', JSON.stringify(this.users))
+  }
+
+  updateUsers(users: IUser[]): void{
+    this.users = users;
+    localStorage.setItem('users', JSON.stringify(users))
   }
 }

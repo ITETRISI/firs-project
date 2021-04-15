@@ -17,7 +17,7 @@ export class UsersListShellComponent implements OnInit {
 
   ngOnInit(): void {
     this.users = this.userService.getUsers();
-
+    console.log(this.users)
   }
 
   hide: boolean = true;
@@ -27,12 +27,16 @@ export class UsersListShellComponent implements OnInit {
     this.hide = !this.hide;
   }
 
-  activeAllUsers(){
+  activeAllUsers(): void{
     this.cardComponents.forEach(card => {
-      if(card.user.age > 18 && !card.user.active){
         card.activateUser()
-      }
     });
+  }
+
+  changeActive(isActive: boolean, user: IUser): void{
+    user.active = isActive;
+    this.userService.updateUsers(this.users)
+    console.log(this.users)
   }
 
 }

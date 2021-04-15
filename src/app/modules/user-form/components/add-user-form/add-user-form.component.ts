@@ -1,6 +1,19 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import {IUser } from 'src/app/modules/users/services/users/users.service';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output
+} from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  Validators
+} from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  IUser
+} from 'src/app/modules/users/services/users/users.service';
+
 
 @Component({
   selector: 'app-add-user-form',
@@ -8,27 +21,62 @@ import {IUser } from 'src/app/modules/users/services/users/users.service';
   styleUrls: ['./add-user-form.component.scss']
 })
 export class AddUserFormComponent implements OnInit {
-  
-  @Output() onSubmitEvent = new EventEmitter<IUser>();
 
-  constructor() { }
+  @Output() onSubmitEvent = new EventEmitter < IUser > ();
+
+  constructor(private _snackBar: MatSnackBar) {}
+
+  emailPattern: string = "^[a-z0-9._%+-]+@gmail.com"
 
   userForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    age: new FormControl(''),
-    company: new FormControl(''),
-    departament: new FormControl(''),
-    gender: new FormControl(''),
+    firstName: new FormControl('', [
+      Validators.required,
+    ]),
+    lastName: new FormControl('', [
+      Validators.required,
+    ]),
+    age: new FormControl('', [
+      Validators.required,
+      Validators.min(15),
+      Validators.max(30)
+    ]),
+    company: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(35)
+    ]),
+    departament: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5)
+    ]),
+    file: new FormControl(''),
+    gender: new FormControl('male', [
+      Validators.required,
+    ]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(this.emailPattern)
+    ]),
   });
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onSubmit() {
+    if(this.userForm.valid){
+      this._snackBar.open('User created', 'Close', {
+        duration: 2000,
+      });
+      this.onSubmitEvent.emit(this.userForm.value);
+    }
   }
 
-  onSubmit(){
-    this.onSubmitEvent.emit(this.userForm.value);
-    return false
+  onFileChange(event: any) {
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      console.log(file.name)
+        this.userForm.patchValue({
+          file: file.name
+       });
+    }
   }
-
 
 }

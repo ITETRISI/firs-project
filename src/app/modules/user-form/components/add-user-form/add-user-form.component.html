@@ -1,32 +1,84 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form">
   <h3>Add User</h3>
-  <mat-form-field appearance="outline">
-    <mat-label>firstName</mat-label>
+  <mat-form-field>
+    <mat-label>First Name</mat-label>
     <input type="text" matInput class="form__input" formControlName="firstName" autocomplete="off">
+    <mat-error *ngIf="userForm.controls['firstName'].hasError('required')">
+      First Name is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>lastName</mat-label>
-    <input type="text" matInput class="form__input" formControlName="lastName" name="lastName" autocomplete="off" >
+
+  <mat-form-field>
+    <mat-label>Last Name</mat-label>
+    <input type="text" matInput class="form__input" formControlName="lastName" autocomplete="off" >
+    <mat-error *ngIf="userForm.controls['lastName'].hasError('required')">
+      Last Name is <strong>required</strong>
+    </mat-error>
   </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>age</mat-label>
-    <input type="number" matInput class="form__input" formControlName="age" name="age" autocomplete="off" >
+
+  <mat-form-field>
+    <mat-label>Age</mat-label>
+    <input type="number" matInput class="form__input" formControlName="age" autocomplete="off" >
+    <mat-error *ngIf="userForm.controls['age'].hasError('required')">
+      Age is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="userForm.controls['age'].hasError('max')">
+      Age is should be less than <strong>30</strong>
+    </mat-error>
+    <mat-error *ngIf="userForm.controls['age'].hasError('min')">
+      Age is should be more than <strong>15</strong>
+    </mat-error>
   </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>company</mat-label> 
-    <input type="text" matInput class="form__input" formControlName="company" name="company" autocomplete="off" >
+
+  <mat-form-field>
+    <mat-label>Company</mat-label> 
+    <input type="text" matInput class="form__input" formControlName="company" autocomplete="off" >
+    <mat-error *ngIf="userForm.controls['company'].hasError('required')">
+      Company is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="userForm.controls['company'].hasError('maxlength')">
+      Company name length should be less than <strong>35 symbols</strong>
+    </mat-error>
   </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>departament</mat-label>
-    <input type="text" matInput class="form__input" formControlName="departament" name="departament" autocomplete="off" >
+
+  <mat-form-field>
+    <mat-label>Departament</mat-label>
+    <input type="text" matInput class="form__input" formControlName="departament" autocomplete="off" >
+    <mat-error *ngIf="userForm.controls['departament'].hasError('required')">
+      Departament is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="userForm.controls['departament'].hasError('minlength')">
+      Departament name length should be more than <strong>5 symbols</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input type="email" matInput class="form__input" formControlName="email" autocomplete="off" >
+    <mat-error *ngIf="userForm.controls['email'].hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="userForm.controls['email'].hasError('pattern')">
+      Email pattern is <strong>not correct</strong>
+    </mat-error>
   </mat-form-field>
   
-  <input type="file" name="photo"  placeholder="photo">
+  <div class="form__wrapper file">
+    <input id="file" type="file" class="file__input" (change)="onFileChange($event)" placeholder="photo">
+    <label for="file" class="file__button">Choose File</label>
+    <span class="file__name">{{userForm.controls['file'].value}}</span>
+  </div>
+
 
   <mat-radio-group aria-label="Select an option" formControlName="gender">
     <mat-radio-button color="primary" value="male">male</mat-radio-button>
     <mat-radio-button color="primary" value="female">female</mat-radio-button>
   </mat-radio-group>
- 
+
+  <mat-error *ngIf="userForm.controls['gender'].hasError('required') ">
+    Gender is <strong>required</strong>
+  </mat-error>
+  
+ <p>{{userForm.status}}</p>
   <button mat-raised-button color="primary" >Submit</button>
 </form>
