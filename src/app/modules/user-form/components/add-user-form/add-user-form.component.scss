@@ -1,24 +1,49 @@
-.form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 400px;
-    padding: 15px;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 5px 10px 0 rgb(0 64 128 / 5%);
-    margin: 0 auto;
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 5px 10px 0 rgb(0 64 128 / 5%);
+  margin: 0 auto;
 }
 
-.mat-radio-button ~ .mat-radio-button {
-    margin-left: 16px;
+.mat-radio-button~.mat-radio-button {
+  margin-left: 16px;
 }
 
 .mat-radio-group {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
-.mat-raised-button{
-    width: fit-content;
-    margin: 10px auto 0;
+.mat-raised-button {
+  width: fit-content;
+  margin: 10px auto 0;
+}
+
+#file {
+  display: none;
+}
+
+.file {
+  display: flex;
+  align-items: center;
+}
+
+.file__name {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.file__button {
+  display: block;
+  padding: 7px;
+  color: #fff;
+  background: #673ab7;
+  border-radius: 5px;
+  width: fit-content;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+  cursor: pointer;
 }
