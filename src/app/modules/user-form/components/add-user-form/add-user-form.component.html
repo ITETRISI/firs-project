@@ -1,1 +1,32 @@
-<p>add-user-form works!</p>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form">
+  <h3>Add User</h3>
+  <mat-form-field appearance="outline">
+    <mat-label>firstName</mat-label>
+    <input type="text" matInput class="form__input" formControlName="firstName" autocomplete="off">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>lastName</mat-label>
+    <input type="text" matInput class="form__input" formControlName="lastName" name="lastName" autocomplete="off" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>age</mat-label>
+    <input type="number" matInput class="form__input" formControlName="age" name="age" autocomplete="off" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>company</mat-label> 
+    <input type="text" matInput class="form__input" formControlName="company" name="company" autocomplete="off" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>departament</mat-label>
+    <input type="text" matInput class="form__input" formControlName="departament" name="departament" autocomplete="off" >
+  </mat-form-field>
+  
+  <input type="file" name="photo"  placeholder="photo">
+
+  <mat-radio-group aria-label="Select an option" formControlName="gender">
+    <mat-radio-button color="primary" value="male">male</mat-radio-button>
+    <mat-radio-button color="primary" value="female">female</mat-radio-button>
+  </mat-radio-group>
+ 
+  <button mat-raised-button color="primary" >Submit</button>
+</form>

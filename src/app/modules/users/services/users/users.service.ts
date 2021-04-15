@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 
 export interface IUser {
-  name: string,
-    age: number,
-    gender: boolean,
-    active: boolean,
+  firstName: string,
+  lastName: string,
+  company: string,
+  departament: string,
+  age: number,
+  gender: string,
+  active?: boolean,
 }
 
 @Injectable({
@@ -12,33 +15,17 @@ export interface IUser {
 })
 export class UsersService {
 
+  users: IUser[] = [];
+
   constructor() { }
 
   getUsers(): IUser[]{
-    return [{
-      name: "Daniil",
-      age: 17,
-      gender: true,
-      active: false,
-    },
-    {
-      name: "Katya",
-      age: 24,
-      gender: false,
-      active: false,
-    },
-    {
-      name: "Nastya",
-      age: 25,
-      gender: false,
-      active: false,
-    },
-    {
-      name: "Oleg",
-      age: 26,
-      gender: true,
-      active: false,
-    }
-  ]
+    this.users = JSON.parse(localStorage.getItem('users') || '[]');
+    return this.users
+  }
+
+  saveUser(user: IUser): void{
+    this.users.push(user)
+    localStorage.setItem('users', JSON.stringify(this.users))
   }
 }

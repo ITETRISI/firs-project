@@ -4,6 +4,7 @@ import { MatButtonModule} from '@angular/material/button';
 import { MatCardModule} from '@angular/material/card';
 import { UsersListShellComponent } from './containers/users-list-shell/users-list-shell.component';
 import { SharedModule } from '../shared/shared.module';
+import { UserFormModule } from '../user-form/user-form.module';
 
 
 @NgModule({
