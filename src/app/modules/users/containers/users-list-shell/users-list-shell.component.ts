@@ -16,8 +16,11 @@ export class UsersListShellComponent implements OnInit {
   constructor(private userService: UsersService) { }
 
   ngOnInit(): void {
+    this.updateUnits();
+  }
+
+  updateUnits(){
     this.users = this.userService.getUsers();
-    console.log(this.users)
   }
 
   hide: boolean = true;
@@ -36,7 +39,11 @@ export class UsersListShellComponent implements OnInit {
   changeActive(isActive: boolean, user: IUser): void{
     user.active = isActive;
     this.userService.updateUsers(this.users)
-    console.log(this.users)
+  }
+
+  deleteUser(user: IUser): void{
+    this.userService.deleteUser(user.id);
+    this.updateUnits();
   }
 
 }

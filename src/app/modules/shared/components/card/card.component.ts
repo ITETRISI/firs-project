@@ -17,7 +17,8 @@ import {
 export class CardComponent implements OnInit {
   @Input() user: IUser;
   @Input() hide: boolean;
-  @Output() changeActive: EventEmitter < boolean > = new EventEmitter < boolean > ();
+  @Output() onChangeActive: EventEmitter < boolean > = new EventEmitter < boolean > ();
+  @Output() onClickButtonDelete: EventEmitter < IUser > = new EventEmitter < IUser > ();
 
   valueCheckbox: boolean;
 
@@ -27,8 +28,12 @@ export class CardComponent implements OnInit {
 
   activateUser(): void {
     if(this.user.age > 18 && !this.user.active){
-      this.changeActive.emit(!this.user.active);
+      this.onChangeActive.emit(!this.user.active);
     }
+  }
+
+  deleteUser(): void{
+    this.onClickButtonDelete.emit(this.user)
   }
 
 }

@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { delay } from "rxjs/operators";
 
 export interface IUser {
+  id: string,
   firstName: string,
   lastName: string,
   company: string,
@@ -33,6 +34,7 @@ export class UsersService {
   }
 
   saveUser(user: IUser): void{
+    user.id = Math.random().toString(36).substr(2, 9);
     this.users.push(user)
     localStorage.setItem('users', JSON.stringify(this.users))
   }
@@ -58,4 +60,9 @@ export class UsersService {
   //   }).pipe(delay(1000))
   // }
   // }
+
+  deleteUser(id: string){
+    this.users = this.users.filter(user => user.id !== id)
+    localStorage.setItem('users', JSON.stringify(this.users))
+  }
 }
