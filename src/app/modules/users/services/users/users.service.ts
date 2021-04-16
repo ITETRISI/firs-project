@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { delay } from "rxjs/operators";
 
 export interface IUser {
   firstName: string,
@@ -9,6 +12,11 @@ export interface IUser {
   gender: string,
   email: string,
   active: boolean,
+}
+
+
+export interface IValidationError {
+  emailExist: boolean
 }
 
 @Injectable({
@@ -33,4 +41,21 @@ export class UsersService {
     this.users = users;
     localStorage.setItem('users', JSON.stringify(users))
   }
+
+  // checkEmail(control: string): Observable<boolean>{
+  //   return new Observable<IValidationError>(observer => {
+  //     const email = this.users.find(user => user.email === control.value);
+  //     if(email){
+  //       observer.next({
+  //         emailExist: true
+  //       }) 
+  //     } else {
+  //       observer.next({
+  //         emailExist: false
+  //       })   
+  //     }
+  //     observer.complete()
+  //   }).pipe(delay(1000))
+  // }
+  // }
 }

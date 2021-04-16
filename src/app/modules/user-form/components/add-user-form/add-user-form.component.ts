@@ -1,17 +1,20 @@
 import {
   Component,
   EventEmitter,
+  Input,
   OnInit,
   Output
 } from '@angular/core';
 import {
   FormGroup,
   FormControl,
-  Validators
+  Validators,
+  AsyncValidatorFn
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 import {
-  IUser
+  IUser, IValidationError, UsersService
 } from 'src/app/modules/users/services/users/users.service';
 
 
@@ -21,10 +24,8 @@ import {
   styleUrls: ['./add-user-form.component.scss']
 })
 export class AddUserFormComponent implements OnInit {
-
   @Output() onSubmitEvent = new EventEmitter < IUser > ();
-
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(private _snackBar: MatSnackBar, private usersService: UsersService) {}
 
   emailPattern: string = "^[a-z0-9._%+-]+@gmail.com"
 
@@ -55,7 +56,10 @@ export class AddUserFormComponent implements OnInit {
     email: new FormControl('', [
       Validators.required,
       Validators.pattern(this.emailPattern)
-    ]),
+    ],
+    // this.usersService.checkEmail(this.userForm.controls['email'].value) as AsyncValidatorFn
+    
+    ),
   });
 
   ngOnInit(): void {}
