@@ -19,11 +19,11 @@ import {
 
 
 @Component({
-  selector: 'app-add-user-form',
-  templateUrl: './add-user-form.component.html',
-  styleUrls: ['./add-user-form.component.scss']
+  selector: 'app-user-form',
+  templateUrl: './user-form.component.html',
+  styleUrls: ['./user-form.component.scss']
 })
-export class AddUserFormComponent implements OnInit {
+export class UserFormComponent implements OnInit {
   @Output() onSubmitEvent = new EventEmitter < IUser > ();
   constructor(private _snackBar: MatSnackBar, private usersService: UsersService) {}
 

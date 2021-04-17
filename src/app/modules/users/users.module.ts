@@ -10,14 +10,14 @@ import { UsersListShellComponent } from './containers/users-list-shell/users-lis
 import { UserFormShellComponent } from './containers/user-form-shell/user-form-shell.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms'
-import { AddUserFormComponent } from './components/add-user-form/add-user-form.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 
 @NgModule({
   declarations: [
     UsersListShellComponent,
     UserFormShellComponent,
-    AddUserFormComponent
+    UserFormComponent
   ],
   imports: [
     CommonModule,
