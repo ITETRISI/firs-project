@@ -26,8 +26,8 @@ export interface IValidationError {
 export class UsersService {
 
   users: IUser[] = JSON.parse(localStorage.getItem('users') || '[]');
-  
-  usersTemplate: IUser[] = [
+
+  defaultUsers: IUser[] = [
     {
       id: "1",
       firstName: "Daniil",
@@ -56,7 +56,7 @@ export class UsersService {
 
   getUsers(): IUser[]{
     if(!localStorage.getItem('users')){
-      this.users = this.usersTemplate
+      this.users = this.defaultUsers
     }
     return this.users
   }

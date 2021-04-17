@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { UsersModule } from './modules/users/users.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderModule } from './modules/header/header.module';
-import { UserFormModule } from './modules/user-form/user-form.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import { UserFormModule } from './modules/user-form/user-form.module';
     UsersModule,
     BrowserAnimationsModule,
     HeaderModule,
-    UserFormModule
   ],
   providers: [],
   bootstrap: [AppComponent]

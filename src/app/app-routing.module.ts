@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserFormShellComponent } from './modules/user-form/containers/user-form-shell/user-form-shell.component';
+import { UserFormShellComponent } from './modules/users/containers/user-form-shell/user-form-shell.component';
 import { UsersListShellComponent } from './modules/users/containers/users-list-shell/users-list-shell.component';
 
 const routes: Routes = [
