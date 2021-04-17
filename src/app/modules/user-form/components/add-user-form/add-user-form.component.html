@@ -42,13 +42,13 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Departament</mat-label>
-    <input type="text" matInput class="form__input" formControlName="departament" autocomplete="off" >
-    <mat-error *ngIf="userForm.controls['departament'].hasError('required')">
-      Departament is <strong>required</strong>
+    <mat-label>Department</mat-label>
+    <input type="text" matInput class="form__input" formControlName="department" autocomplete="off" >
+    <mat-error *ngIf="userForm.controls['department'].hasError('required')">
+      Department is <strong>required</strong>
     </mat-error>
-    <mat-error *ngIf="userForm.controls['departament'].hasError('minlength')">
-      Departament name length should be more than <strong>5 symbols</strong>
+    <mat-error *ngIf="userForm.controls['department'].hasError('minlength')">
+      Department name length should be more than <strong>5 symbols</strong>
     </mat-error>
   </mat-form-field>
 

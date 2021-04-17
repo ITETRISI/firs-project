@@ -45,7 +45,7 @@ export class AddUserFormComponent implements OnInit {
       Validators.required,
       Validators.maxLength(35)
     ]),
-    departament: new FormControl('', [
+    department: new FormControl('', [
       Validators.required,
       Validators.minLength(5)
     ]),

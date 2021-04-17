@@ -8,7 +8,7 @@ export interface IUser {
   firstName: string,
   lastName: string,
   company: string,
-  departament: string,
+  department: string,
   age: number,
   gender: string,
   email: string,
@@ -26,10 +26,38 @@ export interface IValidationError {
 export class UsersService {
 
   users: IUser[] = JSON.parse(localStorage.getItem('users') || '[]');
+  
+  usersTemplate: IUser[] = [
+    {
+      id: "1",
+      firstName: "Daniil",
+      lastName: "Osipenko",
+      company: "ISoft",
+      department: "Front-End",
+      age: 21,
+      gender: "male",
+      email: "daniil@gmail.com",
+      active: false,
+    },
+    {
+      id: "2",
+      firstName: "Dan",
+      lastName: "Osip",
+      company: "ISoft",
+      department: "Front-End",
+      age: 21,
+      gender: "male",
+      email: "dan@gmail.com",
+      active: false,
+    }
+  ]
 
   constructor() { }
 
   getUsers(): IUser[]{
+    if(!localStorage.getItem('users')){
+      this.users = this.usersTemplate
+    }
     return this.users
   }
 
