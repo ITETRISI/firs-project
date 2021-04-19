@@ -24,7 +24,10 @@ import {
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
+
+  @Input() userData: IUser;
   @Output() onSubmitEvent = new EventEmitter < IUser > ();
+
   constructor(private usersService: UsersService) {}
 
   emailPattern: string = "^[a-z0-9._%+-]+@gmail.com"
@@ -61,7 +64,7 @@ export class UserFormComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    console.log(this.userForm.get('email'))
+    console.log(this.userData)
   }
 
   onSubmit() {

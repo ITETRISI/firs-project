@@ -1,7 +1,7 @@
 <mat-card class="card" *ngIf="user.gender != 'male' || hide">
     <mat-card-title>
         {{user.firstName}} {{user.lastName}}
-        <button mat-icon-button color="primary"  routerLink="/edit-user">
+        <button mat-icon-button color="primary"  routerLink="/edit-user" [queryParams]="{userId:user.id}">
             <mat-icon aria-hidden="false" aria-label="Example edit icon">edit</mat-icon>
         </button>
     </mat-card-title>

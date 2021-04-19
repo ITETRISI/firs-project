@@ -1,1 +1,4 @@
-<p>edit-user-form-shell works!</p>
+<div class="wrapper">
+    <app-user-form (onSubmitEvent)="editUser($event)" (userData)="user"></app-user-form>
+    <button mat-raised-button color="primary" type="submit" form="user-form">Submit!</button>
+</div>

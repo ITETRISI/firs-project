@@ -91,4 +91,14 @@ export class UsersService {
     this.users = this.users.filter(user => user.id !== id)
     localStorage.setItem('users', JSON.stringify(this.users))
   }
+
+  updateUser(user: IUser){
+
+  }
+
+  getUserById(id: string): IUser | undefined {
+    let user = this.users.find(user => user.id === id)
+    return user
+  }
+
 }
