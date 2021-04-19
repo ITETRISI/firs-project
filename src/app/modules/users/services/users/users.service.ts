@@ -6,11 +6,11 @@ import {
   AsyncValidatorFn,
 } from '@angular/forms';
 import {
-  Observable,
   of
 } from 'rxjs';
 import {
-  delay, map
+  delay,
+  map
 } from "rxjs/operators";
 
 export interface IUser {
@@ -76,29 +76,36 @@ export class UsersService {
     localStorage.setItem('users', JSON.stringify(users))
   }
 
-  checkEmail(): AsyncValidatorFn {
+  checkEmail(id: string  = ''): AsyncValidatorFn {
+    console.log(id)
     return (control: AbstractControl) => {
-      return of(this.users.find(user => user.email === control.value))
-      .pipe(
-        map(user => {
-          return user ? {emailExist:true} : null}),
-        delay(2000)
+      console.log(control)
+      return of(this.users.find(user => user.email === control.value && user.id !== id))
+        .pipe(
+          map(user => {
+            return user ? {
+              emailExist: true
+            } : null
+          }),
+          delay(2000)
         )
     }
   }
 
-  deleteUser(id: string) {
+  deleteUser(id: string): void {
     this.users = this.users.filter(user => user.id !== id)
     localStorage.setItem('users', JSON.stringify(this.users))
   }
 
-  updateUser(user: IUser){
-
+  updateUser(newUserData: IUser, id: string): void {
+    const INDEX = this.users.findIndex(user => user.id === id)
+    newUserData.id = id
+    this.users[INDEX] = newUserData
   }
 
-  getUserById(id: string): IUser | undefined {
-    let user = this.users.find(user => user.id === id)
-    return user
+  getUserById(id: string): IUser {
+    const INDEX = this.users.findIndex(user => user.id === id)
+    return this.users[INDEX]
   }
 
 }

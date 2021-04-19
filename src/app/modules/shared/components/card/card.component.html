@@ -11,6 +11,6 @@
     <span class="card__info"><b>Company :</b> {{user.company}}</span>
     <span class="card__info"><b>Department :</b> {{user.department}}</span>
     <span class="card__info"><b>Email :</b> {{user.email}}</span>
-    <mat-checkbox class="example-margin" [color]="'primary'" [checked] = "user.active" (change)="activateUser()" [disabled]="user.active || user.age < 18 ? true : false">Active user</mat-checkbox>
+    <mat-checkbox class="example-margin" [color]="'primary'" [checked] = "user.active" (change)="activateUser()" [disabled]="user.active || user.age < 18">Active user</mat-checkbox>
     <button mat-raised-button (click)="deleteUser()" color="warn">Delete User</button>
 </mat-card>

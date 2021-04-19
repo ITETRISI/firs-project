@@ -9,24 +9,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./edit-user-form-shell.component.scss']
 })
 export class EditUserFormShellComponent implements OnInit {
-  user: IUser
+  user: IUser;
+  userId: string;
   constructor(private userService: UsersService, private router: Router, private _snackBar: MatSnackBar, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.queryParams.userId);
+    this.getUser()
   }
 
   editUser(user: IUser){
-    console.log(user)
     this._snackBar.open('User was edit', 'Close', {
       duration: 2000,
     });
-    this.userService.updateUser(user)
+    this.userService.updateUser(user, this.user.id)
     this.router.navigate(['/users']);
   }
 
   getUser(){
-
+    this.userId = this.route.snapshot.queryParams.userId;
+    this.user = this.userService.getUserById(this.userId);
   }
 
 }

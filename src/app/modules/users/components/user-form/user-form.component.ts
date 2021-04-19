@@ -28,11 +28,9 @@ export class UserFormComponent implements OnInit {
   @Input() userData: IUser;
   @Output() onSubmitEvent = new EventEmitter < IUser > ();
 
-  constructor(private usersService: UsersService) {}
+  emailPattern: string = "^[a-z0-9._%+-]+@gmail.com";
 
-  emailPattern: string = "^[a-z0-9._%+-]+@gmail.com"
-
-  userForm = new FormGroup({
+  userForm: FormGroup = new FormGroup({
     firstName: new FormControl('', [
       Validators.required,
     ]),
@@ -59,12 +57,17 @@ export class UserFormComponent implements OnInit {
     email: new FormControl('', [
       Validators.required,
       Validators.pattern(this.emailPattern)
-    ],
-    this.usersService.checkEmail()),
+    ]),
   });
 
+  constructor(private usersService: UsersService) {}
+
   ngOnInit(): void {
-    console.log(this.userData)
+    if(this.userData){
+      this.userForm.patchValue(this.userData)
+    }
+
+    this.userForm.get('email')?.setAsyncValidators(this.usersService.checkEmail(this.userData?.id))
   }
 
   onSubmit() {
