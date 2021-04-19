@@ -55,11 +55,15 @@
   <mat-form-field>
     <mat-label>Email</mat-label>
     <input type="email" matInput class="form__input" formControlName="email" autocomplete="off" >
+    <mat-spinner [diameter]="20" *ngIf="userForm.controls['email'].status === 'PENDING'" ></mat-spinner>
     <mat-error *ngIf="userForm.controls['email'].hasError('required')">
       Email is <strong>required</strong>
     </mat-error>
     <mat-error *ngIf="userForm.controls['email'].hasError('pattern')">
       Email pattern is <strong>not correct</strong>
+    </mat-error>
+    <mat-error *ngIf="userForm.controls['email'].hasError('emailExist')">
+      Email is <strong>already used</strong>
     </mat-error>
   </mat-form-field>
   

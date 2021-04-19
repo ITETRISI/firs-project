@@ -14,7 +14,7 @@ import {
 
 import { Observable } from 'rxjs';
 import {
-  IUser, IValidationError, UsersService
+  IUser, UsersService
 } from 'src/app/modules/users/services/users/users.service';
 
 
@@ -57,12 +57,12 @@ export class UserFormComponent implements OnInit {
       Validators.required,
       Validators.pattern(this.emailPattern)
     ],
-    // this.usersService.checkEmail(this.userForm.controls['email'].value) as AsyncValidatorFn
-    
-    ),
+    this.usersService.checkEmail()),
   });
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.userForm.get('email'))
+  }
 
   onSubmit() {
     if(this.userForm.valid){
