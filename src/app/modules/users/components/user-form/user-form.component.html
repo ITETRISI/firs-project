@@ -1,4 +1,4 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form" id="user-form">
   <h3>Add User</h3>
   <mat-form-field>
     <mat-label>First Name</mat-label>
@@ -80,5 +80,4 @@
   </mat-error>
   
  <p>{{userForm.status}}</p>
-  <button mat-raised-button color="primary" >Submit</button>
 </form>

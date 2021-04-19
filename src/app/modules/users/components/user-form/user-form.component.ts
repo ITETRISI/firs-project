@@ -11,7 +11,7 @@ import {
   Validators,
   AsyncValidatorFn
 } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Observable } from 'rxjs';
 import {
   IUser, IValidationError, UsersService
@@ -25,7 +25,7 @@ import {
 })
 export class UserFormComponent implements OnInit {
   @Output() onSubmitEvent = new EventEmitter < IUser > ();
-  constructor(private _snackBar: MatSnackBar, private usersService: UsersService) {}
+  constructor(private usersService: UsersService) {}
 
   emailPattern: string = "^[a-z0-9._%+-]+@gmail.com"
 
@@ -66,9 +66,6 @@ export class UserFormComponent implements OnInit {
 
   onSubmit() {
     if(this.userForm.valid){
-      this._snackBar.open('User created', 'Close', {
-        duration: 2000,
-      });
       this.onSubmitEvent.emit(this.userForm.value);
     }
   }
