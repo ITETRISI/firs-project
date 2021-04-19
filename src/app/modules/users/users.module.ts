@@ -11,13 +11,15 @@ import { UserFormShellComponent } from './containers/user-form-shell/user-form-s
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms'
 import { UserFormComponent } from './components/user-form/user-form.component';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { EditUserFormShellComponent } from './containers/edit-user-form-shell/edit-user-form-shell.component';
 
 @NgModule({
   declarations: [
     UsersListShellComponent,
     UserFormShellComponent,
-    UserFormComponent
+    UserFormComponent,
+    EditUserFormShellComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { UserFormComponent } from './components/user-form/user-form.component';
     MatSnackBarModule,
     MatRadioModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatProgressSpinnerModule
   ],
   exports:[
     UsersListShellComponent

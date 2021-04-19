@@ -4,6 +4,8 @@ import { CardComponent } from './components/card/card.component';
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatIconModule} from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCardModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatIconModule,
+    RouterModule
   ],
   exports:[
     CardComponent
