@@ -21,7 +21,7 @@ export class UserFormShellComponent implements OnInit {
       this._snackBar.open('User created', 'Close', {
         duration: 2000,
       });
-      this.userService.saveUser(userForm.value)
+      this.userService.saveUser(userForm.value).subscribe()
       this.router.navigate(['/users']);
     }
   }

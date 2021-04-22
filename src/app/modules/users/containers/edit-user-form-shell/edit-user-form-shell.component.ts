@@ -3,6 +3,7 @@ import {IUser, UsersService } from 'src/app/modules/users/services/users/users.s
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-user-form-shell',
@@ -10,7 +11,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./edit-user-form-shell.component.scss']
 })
 export class EditUserFormShellComponent implements OnInit {
-  user: IUser;
+  user: Observable<IUser>;
   userId: any;
   constructor(private userService: UsersService, private router: Router, private _snackBar: MatSnackBar, private route: ActivatedRoute) { }
 
@@ -23,14 +24,14 @@ export class EditUserFormShellComponent implements OnInit {
       this._snackBar.open('User was edit', 'Close', {
         duration: 2000,
       });
-      this.userService.updateUser(userForm.value, this.user.id)
+      this.userService.updateUser(userForm.value, this.userId).subscribe();
       this.router.navigate(['/users']);
     }
   }
 
   getUser(){
     this.userId = this.route.snapshot.params.id;
-    this.user = this.userService.getUserById(this.userId);
+    this.user = this.userService.getUserById(this.userId)
   }
 
 }

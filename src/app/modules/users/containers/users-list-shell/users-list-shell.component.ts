@@ -37,12 +37,11 @@ export class UsersListShellComponent implements OnInit {
   }
 
   changeActive(isActive: boolean, user: IUser): void{
-    user.active = isActive;
-    this.userService.updateUsers(this.users)
+    this.userService.activateUser(user.id,isActive).subscribe()
   }
 
   deleteUser(user: IUser): void{
-    this.userService.deleteUser(user.id);
+    this.userService.deleteUser(user.id).subscribe();
     this.updateUnits();
   }
 

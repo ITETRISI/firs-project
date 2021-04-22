@@ -3,13 +3,12 @@ import {
   EventEmitter,
   Input,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
-  AsyncValidatorFn
 } from '@angular/forms';
 
 import { Observable } from 'rxjs';
@@ -25,11 +24,11 @@ import {
 })
 export class UserFormComponent implements OnInit {
 
-  @Input() userData: IUser;
+  @Input() userData:Observable<IUser>;
   @Output() onSubmitEvent = new EventEmitter < FormGroup > ();
 
   emailPattern: string = "^[a-z0-9._%+-]+@gmail.com";
-
+  user: IUser;
   userForm: FormGroup = new FormGroup({
     firstName: new FormControl('', [
       Validators.required,
@@ -64,10 +63,14 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.userData){
-      this.userForm.patchValue(this.userData)
+      this.userData.subscribe(user => {
+        this.userForm.patchValue(user)
+        this.userForm.get('email')?.setAsyncValidators(this.usersService.checkEmail(user.id))
+      }); 
+    } else {
+      this.userForm.get('email')?.setAsyncValidators(this.usersService.checkEmail())
     }
-
-    this.userForm.get('email')?.setAsyncValidators(this.usersService.checkEmail(this.userData?.id))
+    
   }
 
   onSubmit() {
