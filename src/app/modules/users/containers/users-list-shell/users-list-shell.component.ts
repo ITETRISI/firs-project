@@ -19,8 +19,8 @@ export class UsersListShellComponent implements OnInit {
     this.updateUnits();
   }
 
-  updateUnits(){
-    this.users = this.userService.getUsers();
+  updateUnits(): void{
+    this.userService.getUsers().subscribe((result => this.users = result));
   }
 
   hide: boolean = true;

@@ -26,7 +26,7 @@ import {
 export class UserFormComponent implements OnInit {
 
   @Input() userData: IUser;
-  @Output() onSubmitEvent = new EventEmitter < IUser > ();
+  @Output() onSubmitEvent = new EventEmitter < FormGroup > ();
 
   emailPattern: string = "^[a-z0-9._%+-]+@gmail.com";
 
@@ -72,7 +72,7 @@ export class UserFormComponent implements OnInit {
 
   onSubmit() {
     if(this.userForm.valid){
-      this.onSubmitEvent.emit(this.userForm.value);
+      this.onSubmitEvent.emit(this.userForm);
     }
   }
 

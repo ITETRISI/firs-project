@@ -7,7 +7,7 @@ import { UsersListShellComponent } from './modules/users/containers/users-list-s
 const routes: Routes = [
   { path: 'users', component: UsersListShellComponent },
   { path: 'add-user', component: UserFormShellComponent },
-  { path: 'edit-user', component: EditUserFormShellComponent },
+  { path: 'edit-user/:id', component: EditUserFormShellComponent },
   { path: '**',   redirectTo: 'users', pathMatch: 'full' },
 ];
 

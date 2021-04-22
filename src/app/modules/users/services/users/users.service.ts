@@ -6,10 +6,14 @@ import {
   AsyncValidatorFn,
 } from '@angular/forms';
 import {
-  of
+  Observable,
+  Observer,
+  of,
+  Subject
 } from 'rxjs';
 import {
   delay,
+  distinctUntilChanged,
   map
 } from "rxjs/operators";
 
@@ -56,13 +60,18 @@ export class UsersService {
     }
   ]
 
-  constructor() {}
+  
 
-  getUsers(): IUser[] {
-    if (!localStorage.getItem('users')) {
-      this.users = this.defaultUsers
-    }
-    return this.users
+  constructor() {
+  }
+
+  getUsers(): Observable<IUser[]> {
+    return new Observable((observer: Observer<IUser[]>) => {
+      if (!localStorage.getItem('users')) {
+        this.users = this.defaultUsers
+      }
+      observer.next(this.users)
+    }).pipe(delay(2000))
   }
 
   saveUser(user: IUser): void {
@@ -77,7 +86,6 @@ export class UsersService {
   }
 
   checkEmail(id: string  = ''): AsyncValidatorFn {
-    console.log(id)
     return (control: AbstractControl) => {
       console.log(control)
       return of(this.users.find(user => user.email === control.value && user.id !== id))
@@ -101,6 +109,7 @@ export class UsersService {
     const INDEX = this.users.findIndex(user => user.id === id)
     newUserData.id = id
     this.users[INDEX] = newUserData
+    localStorage.setItem('users', JSON.stringify(this.users))
   }
 
   getUserById(id: string): IUser {
