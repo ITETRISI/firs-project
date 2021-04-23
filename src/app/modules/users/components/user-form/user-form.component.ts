@@ -11,9 +11,21 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { Observable } from 'rxjs';
 import {
-  IUser, UsersService
+  combineLatest,
+  forkJoin,
+  merge,
+  Observable,
+  zip
+} from 'rxjs';
+import {
+  debounceTime,
+  map,
+  mergeMap
+} from 'rxjs/operators';
+import {
+  IUser,
+  UsersService
 } from 'src/app/modules/users/services/users/users.service';
 
 
@@ -24,11 +36,12 @@ import {
 })
 export class UserFormComponent implements OnInit {
 
-  @Input() userData:Observable<IUser>;
+  @Input() userData: Observable < IUser > ;
   @Output() onSubmitEvent = new EventEmitter < FormGroup > ();
 
   emailPattern: string = "^[a-z0-9._%+-]+@gmail.com";
   user: IUser;
+
   userForm: FormGroup = new FormGroup({
     firstName: new FormControl('', [
       Validators.required,
@@ -62,31 +75,42 @@ export class UserFormComponent implements OnInit {
   constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
-    if(this.userData){
+    if (this.userData) {
       this.userData.subscribe(user => {
         this.userForm.patchValue(user)
-        this.userForm.get('email')?.setAsyncValidators(this.usersService.checkEmail(user.id))
-      }); 
+        this.userForm.controls['email'].setAsyncValidators(this.usersService.checkEmail(user.id))
+      });
     } else {
-      this.userForm.get('email')?.setAsyncValidators(this.usersService.checkEmail())
+      this.userForm.controls['email'].setAsyncValidators(this.usersService.checkEmail())
     }
-    
+    this.generateEmail()
   }
 
   onSubmit() {
-    if(this.userForm.valid){
+    if (this.userForm.valid) {
       this.onSubmitEvent.emit(this.userForm);
     }
   }
 
   onFileChange(event: any) {
-    if(event.target.files && event.target.files.length) {
+    if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       console.log(file.name)
-        this.userForm.patchValue({
-          file: file.name
-       });
+      this.userForm.patchValue({
+        file: file.name
+      });
     }
+  }
+
+  generateEmail(): void {
+    combineLatest(
+        [this.userForm.controls['firstName'].valueChanges,
+          this.userForm.controls['lastName'].valueChanges
+        ]
+      )
+      .subscribe((value) => {
+        this.userForm.controls['email'].setValue(value.join('') + '@gmail.com');
+      })
   }
 
 }
