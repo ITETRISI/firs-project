@@ -4,6 +4,7 @@ import {
 import {
   AbstractControl,
   AsyncValidatorFn,
+  ValidationErrors,
 } from '@angular/forms';
 import {
   Observable,
@@ -14,6 +15,7 @@ import {
 import {
   delay,
   distinctUntilChanged,
+  filter,
   map
 } from "rxjs/operators";
 
@@ -34,7 +36,7 @@ export interface IUser {
 })
 export class UsersService {
 
-  users: IUser[] ;
+  users: IUser[];
 
   defaultUsers: IUser[] = [{
       id: "1",
@@ -60,34 +62,42 @@ export class UsersService {
     }
   ]
 
-
-
   constructor() {}
 
   getUsers(): Observable < IUser[] > {
-    return new Observable((observer: Observer<IUser[]>) => {
-      setTimeout(()=> {
+    return new Observable((observer: Observer < IUser[] > ) => {
+      setTimeout(() => {
         if (!localStorage.getItem('users')) {
-          this.users = this.defaultUsers
-          localStorage.setItem('users', JSON.stringify(this.users))
-        } else {
-          this.users = JSON.parse(localStorage.getItem('users') || '[]')
+          localStorage.setItem('users', JSON.stringify(this.defaultUsers))
         }
-        observer.next(this.users)
-      },2000)
+        this.users = JSON.parse(localStorage.getItem('users') || '[]')
+        observer.next(JSON.parse(localStorage.getItem('users') || '[]'))
+      }, 1000)
     })
+
   }
 
-  saveUser(user: IUser): Observable<void> {
-    user.id = Math.random().toString(36).substr(2, 9);
-    this.users.push(user)
-    return of(localStorage.setItem('users', JSON.stringify(this.users))).pipe(delay(5000))
+  saveUser(user: IUser): Observable < void > {
+    return this.getUsers()
+    .pipe(
+      map((users) => {
+        user.id = Math.random().toString(36).substr(2, 9);
+        users.push(user)
+        localStorage.setItem('users', JSON.stringify(users))
+      }),
+      delay(500)
+    );
   }
 
-  activateUser(userId: string, isActive: boolean): Observable<void>{
-    const INDEX = this.users.findIndex(user => user.id === userId)
-    this.users[INDEX].active = isActive;
-    return of(localStorage.setItem('users', JSON.stringify(this.users))).pipe(delay(2000))
+  activateUser(userId: string, isActive: boolean): Observable <void > {
+    return this.getUsers()
+    .pipe(
+      map((users) => {
+        const INDEX = users.findIndex(user => user.id === userId)
+        users[INDEX].active = isActive;
+        localStorage.setItem('users', JSON.stringify(users))
+      })
+    );
   }
 
   checkEmail(id: string = ''): AsyncValidatorFn {
@@ -104,34 +114,32 @@ export class UsersService {
     }
   }
 
-  deleteUser(id: string): Observable<void> {
-    return new Observable(()=> {
-      setTimeout(()=>{
-        this.users = this.users.filter(user => user.id !== id)
-        localStorage.setItem('users', JSON.stringify(this.users))
-      },1500)
-    })
-    
+  deleteUser(id: string): Observable < void > {
+    return this.getUsers()
+    .pipe(
+      map((users) => {
+        const filteredUsers = users.filter(user => user.id !== id)
+        localStorage.setItem('users', JSON.stringify(filteredUsers))
+      }),
+      delay(500)
+    );
   }
 
-  updateUser(newUserData: IUser, id: string): Observable<void> {
-    return new Observable(() => {
-      setTimeout(() => {
-        const INDEX = this.users.findIndex(user => user.id === id)
-        newUserData.id = id
-        this.users[INDEX] = newUserData
-        localStorage.setItem('users', JSON.stringify(this.users))
-      }, 1000)
-    })
+  updateUser(newUserData: IUser, id: string): Observable < void > {
+    return this.getUsers()
+    .pipe(
+      map((users) => {
+        const INDEX = users.findIndex(user => user.id === id);
+        newUserData.id = id;
+        users[INDEX] = newUserData;
+        localStorage.setItem('users', JSON.stringify(users))
+      }),
+      delay(500)
+    );
   }
 
-  getUserById(id: string): Observable<IUser> {
-    return new Observable((observer: Observer<IUser>) => {
-      setTimeout(() => {
-        const INDEX = this.users.findIndex(user => user.id === id);
-        observer.next(this.users[INDEX]);
-      }, 1000)
-    })
+  getUserById(id: string): Observable < IUser > {
+    return this.getUsers().pipe(map((users) => users.filter(user => user.id === id)[0]));
   }
 
 }

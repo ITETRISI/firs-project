@@ -1,4 +1,6 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { from, of } from 'rxjs';
+import { filter, flatMap, map } from 'rxjs/operators';
 import { CardComponent } from 'src/app/modules/shared/components/card/card.component';
 import { IUser, UsersService } from 'src/app/modules/users/services/users/users.service';
 
@@ -20,7 +22,7 @@ export class UsersListShellComponent implements OnInit {
   }
 
   updateUnits(): void{
-    this.userService.getUsers().subscribe((result => this.users = result));
+    this.userService.getUsers().subscribe(result => this.users = result);
   }
 
   hide: boolean = true;
@@ -37,7 +39,9 @@ export class UsersListShellComponent implements OnInit {
   }
 
   changeActive(isActive: boolean, user: IUser): void{
+    console.log(user)
     this.userService.activateUser(user.id,isActive).subscribe()
+    this.updateUnits();
   }
 
   deleteUser(user: IUser): void{
