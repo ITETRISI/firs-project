@@ -13,16 +13,8 @@ import {
 
 import {
   combineLatest,
-  forkJoin,
-  merge,
   Observable,
-  zip
 } from 'rxjs';
-import {
-  debounceTime,
-  map,
-  mergeMap
-} from 'rxjs/operators';
 import {
   IUser,
   UsersService
@@ -36,8 +28,8 @@ import {
 })
 export class UserFormComponent implements OnInit {
 
-  @Input() userData: Observable < IUser > ;
-  @Output() onSubmitEvent = new EventEmitter < FormGroup > ();
+  @Input() userData$: Observable < IUser > ;
+  @Output() saveUserForm = new EventEmitter < FormGroup > ();
 
   emailPattern: string = "^[a-z0-9._%+-]+@gmail.com";
   user: IUser;
@@ -75,8 +67,8 @@ export class UserFormComponent implements OnInit {
   constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
-    if (this.userData) {
-      this.userData.subscribe(user => {
+    if (this.userData$) {
+      this.userData$.subscribe(user => {
         this.userForm.patchValue(user)
         this.userForm.controls['email'].setAsyncValidators(this.usersService.checkEmail(user.id))
       });
@@ -84,12 +76,8 @@ export class UserFormComponent implements OnInit {
       this.userForm.controls['email'].setAsyncValidators(this.usersService.checkEmail())
     }
     this.generateEmail()
-  }
 
-  onSubmit() {
-    if (this.userForm.valid) {
-      this.onSubmitEvent.emit(this.userForm);
-    }
+    this.saveUserForm.emit(this.userForm);
   }
 
   onFileChange(event: any) {

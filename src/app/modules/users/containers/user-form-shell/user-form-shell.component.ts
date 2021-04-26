@@ -11,19 +11,25 @@ import { FormGroup } from '@angular/forms';
 })
 export class UserFormShellComponent implements OnInit {
 
+  userForm: FormGroup;
+
   constructor(private userService: UsersService, private router: Router, private _snackBar: MatSnackBar,) { }
 
   ngOnInit(): void {
   }
 
-  addUser(userForm: FormGroup){
-    if(userForm.valid){
+  addUser(){
+    if(this.userForm.valid){
       this._snackBar.open('User created', 'Close', {
         duration: 2000,
       });
-      this.userService.saveUser(userForm.value).subscribe()
+      this.userService.saveUser(this.userForm.value).subscribe()
       this.router.navigate(['/users']);
     }
+  }
+
+  saveUserForm(userForm: FormGroup){
+    this.userForm = userForm
   }
 
 }

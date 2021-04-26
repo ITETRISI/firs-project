@@ -1,4 +1,4 @@
 <div class="wrapper">
-    <app-user-form (onSubmitEvent)="editUser($event)" [userData]="user"></app-user-form>
-    <button mat-raised-button color="primary" type="submit" form="user-form">Submit!</button>
+    <app-user-form (saveUserForm)="saveUserForm($event)" [userData$]="user$"></app-user-form>
+    <button mat-raised-button color="primary" type="submit" (click)="editUser()"  form="user-form">Submit!</button>
 </div>

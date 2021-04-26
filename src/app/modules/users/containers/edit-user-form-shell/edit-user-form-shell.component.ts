@@ -11,7 +11,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./edit-user-form-shell.component.scss']
 })
 export class EditUserFormShellComponent implements OnInit {
-  user: Observable<IUser>;
+  user$: Observable<IUser>;
+  user: IUser;
+  userForm: FormGroup;
   userId: any;
   constructor(private userService: UsersService, private router: Router, private _snackBar: MatSnackBar, private route: ActivatedRoute) { }
 
@@ -19,19 +21,25 @@ export class EditUserFormShellComponent implements OnInit {
     this.getUser()
   }
 
-  editUser(userForm: FormGroup){
-    if(userForm.valid){
+  editUser(){
+    if(this.userForm.valid){
       this._snackBar.open('User was edit', 'Close', {
         duration: 2000,
       });
-      this.userService.updateUser(userForm.value, this.userId).subscribe();
+      this.user = this.userForm.value;
+      this.userService.updateUser(this.userForm.value, this.userId).subscribe();
       this.router.navigate(['/users']);
     }
   }
 
   getUser(){
     this.userId = this.route.snapshot.params.id;
-    this.user = this.userService.getUserById(this.userId)
+    this.user$ = this.userService.getUserById(this.userId);
+    this.user$.subscribe(result => this.user = result) ;
+  }
+
+  saveUserForm(userForm: FormGroup){
+    this.userForm = userForm;
   }
 
 }

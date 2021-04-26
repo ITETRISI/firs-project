@@ -89,14 +89,13 @@ export class UsersService {
     );
   }
 
-  activateUser(userId: string, isActive: boolean): Observable <IUser[]> {
+  activateUser(userId: string, isActive: boolean): Observable <void> {
     return this.getUsers()
     .pipe(
       map((users) => {
         const INDEX = users.findIndex(user => user.id === userId)
         users[INDEX].active = isActive;
         localStorage.setItem('users', JSON.stringify(users))
-        return users
       })
     );
   }
@@ -115,13 +114,12 @@ export class UsersService {
     }
   }
 
-  deleteUser(id: string): Observable < IUser[] > {
+  deleteUser(id: string): Observable <void > {
     return this.getUsers()
     .pipe(
       map((users) => {
         const filteredUsers = users.filter(user => user.id !== id)
         localStorage.setItem('users', JSON.stringify(filteredUsers))
-        return filteredUsers
       }),
       delay(500)
     );
