@@ -1,1 +1,29 @@
-<p>registration-form works!</p>
+<form [formGroup]="registrationForm">
+  <h3>Registration</h3>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input type="text" matInput class="form__input" formControlName="userName" autocomplete="off">
+    <mat-error *ngIf="registrationForm.get('userName').hasError('required')">
+      Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <div formGroupName="passwordGroup" class="form-group">
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input type="password" matInput class="form__input" formControlName="password" autocomplete="off">
+      <mat-error *ngIf="registrationForm.get('passwordGroup.password').hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Confirm Password</mat-label>
+        <input type="password" matInput class="form__input" formControlName="confirmPassword" autocomplete="off">
+        <mat-error *ngIf="registrationForm.get('passwordGroup.confirmPassword').hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+  </div>
+
+</form>

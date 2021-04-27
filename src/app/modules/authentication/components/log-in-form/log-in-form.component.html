@@ -1,1 +1,18 @@
-<p>log-in-form works!</p>
+<form [formGroup]="logInForm" id="log-in-form">
+    <h3>LogIn</h3>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input type="text" matInput class="form__input" formControlName="userName" autocomplete="off">
+      <mat-error *ngIf="logInForm.controls['userName'].hasError('required')">
+        Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input type="password" matInput class="form__input" formControlName="userName" autocomplete="off">
+        <mat-error *ngIf="logInForm.controls['password'].hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+</form>
