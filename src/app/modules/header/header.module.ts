@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
+import { AuthenticationModule } from '../authentication/authentication.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {MatButtonModule} from '@angular/material/button';
   imports: [
     CommonModule,
     RouterModule,
-    MatButtonModule
+    MatButtonModule,
+    AuthenticationModule
   ],
   exports: [
     HeaderComponent

@@ -15,11 +15,11 @@ import {
 } from 'rxjs';
 import {
   UserExitDialogComponent
-} from '../../components/user-exit-dialog/user-exit-dialog.component';
-import { IUser } from '../../services/users/users.service';
+} from '../components/user-exit-dialog/user-exit-dialog.component';
+import { IUser } from '../services/users/users.service';
 import {
   EditUserFormShellComponent
-} from './edit-user-form-shell.component';
+} from '../containers/edit-user-form-shell/edit-user-form-shell.component';
 
 @Injectable({
   providedIn: 'root'
