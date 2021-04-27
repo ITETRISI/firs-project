@@ -18,12 +18,19 @@
     </mat-form-field>
 
     <mat-form-field>
-        <mat-label>Confirm Password</mat-label>
-        <input type="password" matInput class="form__input" formControlName="confirmPassword" autocomplete="off">
-        <mat-error *ngIf="registrationForm.get('passwordGroup.confirmPassword').hasError('required')">
-          Password is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input type="password" matInput class="form__input" formControlName="confirmPassword" autocomplete="off">
+      <mat-error *ngIf="registrationForm.get('passwordGroup.confirmPassword').hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="registrationForm.get('passwordGroup.confirmPassword').hasError('minlength')">
+        Password <strong>minlength 3</strong>
+      </mat-error>
+      <mat-error *ngIf="registrationForm.get('passwordGroup.confirmPassword').hasError('passwordNotMatch')">
+        Password <strong>not match</strong>
+      </mat-error>
+    </mat-form-field>
+
   </div>
 
 </form>

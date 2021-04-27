@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registration-form',
@@ -18,13 +18,28 @@ export class RegistrationFormComponent implements OnInit {
       ]),
       confirmPassword: new FormControl('', [
         Validators.required,
+        Validators.minLength(3),
       ]),
     })
   }) 
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+    this.registrationForm.get('passwordGroup').setValidators([this.checkPassword('password','confirmPassword')])
+  }
+
+  checkPassword(passwordControlName: string, confirmControlName: string): ValidatorFn {
+    return (group: FormGroup): {passwordNotMatch: boolean} | null => {
+      const error = {passwordNotMatch: true}
+      const password = group.get(passwordControlName).value;
+      const confirmPassword = group.get(confirmControlName).value;
+      const isMatch = password === confirmPassword;
+      if(!isMatch){
+        group.get('confirmPassword').setErrors(error)
+      }
+      return isMatch ? null : error;
+    };
   }
 
 }
