@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ExitEditUserFormGuard } from './exit-edit-user-form.guard';
+import { ExitEditUserFormGuard } from '../../guard/exit-edit-user-form.guard';
 
 describe('ExitEditUserFormGuard', () => {
   let guard: ExitEditUserFormGuard;
