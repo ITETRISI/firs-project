@@ -6,19 +6,20 @@ import { EditUserFormShellComponent } from './modules/users/containers/edit-user
 import { ExitEditUserFormGuard } from './modules/users/guard/exit-edit-user-form.guard';
 import { UserFormShellComponent } from './modules/users/containers/user-form-shell/user-form-shell.component';
 import { UsersListShellComponent } from './modules/users/containers/users-list-shell/users-list-shell.component';
+import { AuthenticationGuard } from './modules/authentication/guard/authentication.guard';
 
 const routes: Routes = [
-  { path: 'users', component: UsersListShellComponent },
-  { path: 'add-user', component: UserFormShellComponent },
-  { path: 'edit-user/:id', component: EditUserFormShellComponent, canDeactivate: [ExitEditUserFormGuard] },
+  { path: 'users', component: UsersListShellComponent, canActivate: [AuthenticationGuard] },
+  { path: 'add-user', component: UserFormShellComponent, canActivate: [AuthenticationGuard] },
+  { path: 'edit-user/:id', component: EditUserFormShellComponent, canDeactivate: [ExitEditUserFormGuard], canActivate: [AuthenticationGuard] },
   { path: 'log-in', component: LogInShellComponent },
-  { path: 'registarion', component: RegistrationShellComponent },
+  { path: 'registration', component: RegistrationShellComponent },
   { path: '**',   redirectTo: 'users', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  providers: [ExitEditUserFormGuard],
+  providers: [ExitEditUserFormGuard, AuthenticationGuard],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
