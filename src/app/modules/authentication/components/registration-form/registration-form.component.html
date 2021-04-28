@@ -1,4 +1,4 @@
-<form [formGroup]="registrationForm">
+<form novalidate [formGroup]="registrationForm" id="registration-form">
   <h3>Registration</h3>
   <mat-form-field>
     <mat-label>Name</mat-label>
@@ -8,29 +8,7 @@
     </mat-error>
   </mat-form-field>
 
-  <div formGroupName="passwordGroup" class="form-group">
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input type="password" matInput class="form__input" formControlName="password" autocomplete="off">
-      <mat-error *ngIf="registrationForm.get('passwordGroup.password').hasError('required')">
-        Password is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
+  <app-passwords (addFormControl)="addFormControl($event)"></app-passwords>
 
-    <mat-form-field>
-      <mat-label>Confirm Password</mat-label>
-      <input type="password" matInput class="form__input" formControlName="confirmPassword" autocomplete="off">
-      <mat-error *ngIf="registrationForm.get('passwordGroup.confirmPassword').hasError('required')">
-        Password is <strong>required</strong>
-      </mat-error>
-      <mat-error *ngIf="registrationForm.get('passwordGroup.confirmPassword').hasError('minlength')">
-        Password <strong>minlength 3</strong>
-      </mat-error>
-      <mat-error *ngIf="registrationForm.get('passwordGroup.confirmPassword').hasError('passwordNotMatch')">
-        Password <strong>not match</strong>
-      </mat-error>
-    </mat-form-field>
-
-  </div>
-
+  <span>{{registrationForm.status}}</span>
 </form>

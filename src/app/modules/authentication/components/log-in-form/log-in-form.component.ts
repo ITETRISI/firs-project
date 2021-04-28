@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
 } from '@angular/forms';
+
 
 @Component({
   selector: 'app-log-in-form',
@@ -11,6 +12,8 @@ import {
   styleUrls: ['./log-in-form.component.scss']
 })
 export class LogInFormComponent implements OnInit {
+
+  @Output() setLogInForm = new EventEmitter<FormGroup>();
 
   logInForm: FormGroup = new FormGroup ({
     userName: new FormControl('', [
@@ -24,6 +27,7 @@ export class LogInFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.setLogInForm.emit(this.logInForm)
   }
 
 }

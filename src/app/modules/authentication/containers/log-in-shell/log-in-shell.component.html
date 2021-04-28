@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <app-log-in-form></app-log-in-form>
-    <button mat-raised-button color="primary" type="submit" form="log-in-form">Submit!</button>
+    <app-log-in-form (setLogInForm)="setLogInForm($event)"></app-log-in-form>
+    <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" form="log-in-form">Submit!</button>
 </div>
 

@@ -10,7 +10,7 @@
 
     <mat-form-field>
         <mat-label>Password</mat-label>
-        <input type="password" matInput class="form__input" formControlName="userName" autocomplete="off">
+        <input type="password" matInput class="form__input" formControlName="password" autocomplete="off">
         <mat-error *ngIf="logInForm.controls['password'].hasError('required')">
           Password is <strong>required</strong>
         </mat-error>

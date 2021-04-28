@@ -1,4 +1,4 @@
 <div class="wrapper">
-    <app-registration-form></app-registration-form>
-    <button mat-raised-button color="primary" type="submit" form="log-in-form">Submit!</button>
+    <app-registration-form (setRegistrationForm)="setRegistrationForm($event)"></app-registration-form>
+    <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" form="registration-form">Submit!</button>
 </div>
