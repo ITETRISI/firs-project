@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-registration-shell',
@@ -10,7 +12,7 @@ export class RegistrationShellComponent implements OnInit {
 
   registrationForm: FormGroup;
 
-  constructor() { }
+  constructor(private authentication: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +24,11 @@ export class RegistrationShellComponent implements OnInit {
 
   onSubmit(){
     if (this.registrationForm.valid) {
-      console.log('form submitted');
+      const name = this.registrationForm.get('userName').value;
+      const password = this.registrationForm.get('passwordForm.password').value;
+      this.authentication.saveUser(name,password).subscribe(() => {
+        this.router.navigate(['log-in']);
+      })
     } else {
       this.registrationForm.markAllAsTouched();
     }

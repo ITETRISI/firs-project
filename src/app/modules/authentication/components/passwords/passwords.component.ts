@@ -50,7 +50,6 @@ export class PasswordsComponent implements OnInit {
         password.valueChanges,
         confirmPassword.valueChanges
       ]).subscribe(result => {
-      console.log(result)
       if(result[0] !== result[1]){
         confirmPassword.setErrors(error)
       }

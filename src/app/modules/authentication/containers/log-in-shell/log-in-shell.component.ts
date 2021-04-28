@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-log-in-shell',
@@ -8,21 +10,24 @@ import { FormGroup } from '@angular/forms';
 })
 export class LogInShellComponent implements OnInit {
 
-  lofInForm: FormGroup
+  logInForm: FormGroup
 
-  constructor() { }
+  constructor(private authentication: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  setLogInForm(lofInForm: FormGroup){
-    this.lofInForm = lofInForm;
+  setLogInForm(logInForm: FormGroup){
+    this.logInForm = logInForm;
   }
 
   onSubmit(){
-    console.log(this.lofInForm)
-    if (this.lofInForm.valid) {
+    console.log(this.logInForm)
+    if (this.logInForm.valid) {
       console.log('form submitted');
+      this.authentication.getUser(this.logInForm.value).subscribe(() => {
+        this.router.navigate(['users']);
+      })
     } 
   }
 
