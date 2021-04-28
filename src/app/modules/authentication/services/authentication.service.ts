@@ -13,19 +13,14 @@ interface ILogIn {
 })
 export class AuthenticationService {
 
-  isLogIn: boolean = false
+  users: Array<ILogIn> = [
+    { 
+      userName: 'admin',
+      password: 'admin'
+    }
+  ]
 
   constructor() { }
-
-  isUserLogIn(): Observable<boolean>{
-    return new Observable((observer: Observer<boolean>) =>{
-      if(JSON.parse(localStorage.getItem('user')) && this.isLogIn){
-        observer.next(true)
-      } else {
-        observer.next(false)
-      }
-    })
-  }
 
   saveUser(userName: string, password: string){
     return new Observable((observer) =>{
@@ -33,28 +28,22 @@ export class AuthenticationService {
         userName,
         password
       };
-      this.isLogIn = false;
-      localStorage.setItem('user', JSON.stringify(user))
+      this.users.push(user)
       observer.next()
     })
   }
 
-  getUser(userData: ILogIn): Observable<ILogIn>{
+  getUser(userData: ILogIn): Observable<void>{
     console.log(userData)
-    return new Observable((observer: Observer<ILogIn>) =>{
-      const user: ILogIn = JSON.parse(localStorage.getItem('user'))
-      this.isLogIn = true;
-      observer.next(user)
-    }).pipe(
-      map((user) => {
-      if(user.userName === userData.userName && user.password === userData.password){
-        return user
+    return new Observable((observer: Observer<void>) =>{
+      const user = this.users.find((user) => user.userName === userData.userName && user.password === userData.password)
+      if(user){
+        localStorage.setItem('user', JSON.stringify(user))
+        observer.next()
       } else {
-        throw new Error('Data is not correct');
+        observer.error('Invalid Data')
       }
-    }),
-    
-    )
+    })
   }
 
   deleteUser(){
