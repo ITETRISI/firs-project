@@ -139,7 +139,8 @@ export class UsersService {
   }
 
   getUserById(id: string): Observable < IUser > {
-    return this.getUsers().pipe(map((users) => users.filter(user => user.id === id)[0]));
+    return this.getUsers().pipe(map((users) => {
+      return users.find(user => user.id === id)}));
   }
 
 }
