@@ -1,0 +1,13 @@
+<mat-label>{{userData?.firstName}} {{userData?.lastName}}</mat-label>
+
+<nav mat-tab-nav-bar>
+    <a mat-tab-link color="primary" [routerLink]="['company-info']">
+        company-info
+    </a>
+    <a mat-tab-link [routerLink]="['personal-info']">
+        personal-info
+    </a>
+    <a mat-tab-link [routerLink]="['contacts-info']">
+        contacts
+    </a>
+</nav>

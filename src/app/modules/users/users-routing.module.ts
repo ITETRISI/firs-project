@@ -8,6 +8,7 @@ import {
 import {
   EditUserFormShellComponent
 } from './containers/edit-user-form-shell/edit-user-form-shell.component';
+import { TabsShellComponent } from '../tabs/containers/tabs-shell/tabs-shell.component';
 import {
   UserFormShellComponent
 } from './containers/user-form-shell/user-form-shell.component';
@@ -32,6 +33,10 @@ const routes: Routes = [{
     component: EditUserFormShellComponent,
     canDeactivate: [ExitEditUserFormGuard]
   },
+  {
+      path: 'details/:id',
+      loadChildren: () => import('../tabs/tabs.module').then(m => m.TabsModule),
+  }
 ];
 
 @NgModule({

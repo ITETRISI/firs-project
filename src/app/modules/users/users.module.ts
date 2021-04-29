@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'
 
 import { SharedModule } from '../shared/shared.module';
+import { UsersRoutingModule } from './users-routing.module';
 
 import { UsersListShellComponent } from './containers/users-list-shell/users-list-shell.component';
 import { UserFormShellComponent } from './containers/user-form-shell/user-form-shell.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { EditUserFormShellComponent } from './containers/edit-user-form-shell/edit-user-form-shell.component';
 import { UserExitDialogComponent } from './components/user-exit-dialog/user-exit-dialog.component';
+
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatButtonModule} from '@angular/material/button';
@@ -19,7 +21,10 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
-import { UsersRoutingModule } from './users-routing.module';
+import { TabsModule } from '../tabs/tabs.module';
+
+
+
 
 @NgModule({
   declarations: [
@@ -27,7 +32,7 @@ import { UsersRoutingModule } from './users-routing.module';
     UserFormShellComponent,
     UserFormComponent,
     EditUserFormShellComponent,
-    UserExitDialogComponent
+    UserExitDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -42,7 +47,8 @@ import { UsersRoutingModule } from './users-routing.module';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatListModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    TabsModule
   ],
   exports:[
     UsersListShellComponent
