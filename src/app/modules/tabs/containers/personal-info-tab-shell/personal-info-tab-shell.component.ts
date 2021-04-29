@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-personal-info',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonalInfoTabShellComponent implements OnInit {
 
-  constructor() { }
+  paramsData;
 
+  constructor(private route: ActivatedRoute) { }
+  
   ngOnInit(): void {
+   console.log(this.route)
+   this.route.queryParams.subscribe(params => {
+    this.paramsData = params;
+    });
   }
 
 }

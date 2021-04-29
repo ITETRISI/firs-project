@@ -21,10 +21,6 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
-import { TabsModule } from '../tabs/tabs.module';
-
-
-
 
 @NgModule({
   declarations: [
@@ -48,7 +44,6 @@ import { TabsModule } from '../tabs/tabs.module';
     MatDialogModule,
     MatListModule,
     UsersRoutingModule,
-    TabsModule
   ],
   exports:[
     UsersListShellComponent
