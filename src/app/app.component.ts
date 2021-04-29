@@ -5,9 +5,6 @@ import {
   NavigationEnd,
   Router
 } from '@angular/router';
-import {
-  filter
-} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
