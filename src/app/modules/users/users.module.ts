@@ -19,6 +19,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
+import { UsersRoutingModule } from './users-routing.module';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {MatListModule} from '@angular/material/list';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatListModule,
+    UsersRoutingModule
   ],
   exports:[
     UsersListShellComponent
