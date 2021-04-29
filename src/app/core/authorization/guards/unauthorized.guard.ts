@@ -15,7 +15,6 @@ export class UnauthorizedGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authorization.isUserLoggedIn().pipe(map((authorized) => {
-      console.log('an',authorized)
       if(authorized){
         this.router.navigate(['users'])
       }
