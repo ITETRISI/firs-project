@@ -1,6 +1,6 @@
 <mat-card class="card" *ngIf="user.gender != 'male' || hide">
     <mat-card-title>
-        {{user.firstName}} {{user.lastName}}
+        {{user.firstName | join:user.lastName}}
         <button mat-icon-button color="primary"  [routerLink]="['/edit-user',user.id]">
             <mat-icon aria-hidden="false" aria-label="Example edit icon">edit</mat-icon>
         </button>
