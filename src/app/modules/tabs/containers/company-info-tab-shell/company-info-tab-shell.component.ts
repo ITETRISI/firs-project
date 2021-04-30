@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-company-info-tab',
+  selector: 'app-company-info-tab-shell',
   templateUrl: './company-info-tab-shell.component.html',
   styleUrls: ['./company-info-tab-shell.component.scss']
 })
