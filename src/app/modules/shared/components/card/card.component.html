@@ -1,13 +1,13 @@
 <mat-card class="card" *ngIf="user.gender != 'male' || hide">
     <mat-card-title>
-        {{user.firstName | join:user.lastName}}
+        {{user.firstName | join:user.lastName | titlecase}}
         <button mat-icon-button color="primary"  [routerLink]="['/edit-user',user.id]">
             <mat-icon aria-hidden="false" aria-label="Example edit icon">edit</mat-icon>
         </button>
     </mat-card-title>
     
-    <span class="card__info"><b>Age :</b> {{user.age}}</span>
-    <span class="card__info"><b>Gender :</b> {{user.gender}}</span>
+    <span class="card__info"><b>Age :</b> {{user.age | birthYear}}</span>
+    <span class="card__info"><b>Gender :</b> {{user.gender }}</span>
     <span class="card__info"><b>Company :</b> {{user.company}}</span>
     <span class="card__info"><b>Department :</b> {{user.department}}</span>
     <span class="card__info"><b>Email :</b> {{user.email}}</span>

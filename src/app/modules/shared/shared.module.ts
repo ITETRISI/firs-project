@@ -7,11 +7,13 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { JoinPipe } from './pipes/join.pipe';
+import { BirthYearPipe } from './pipes/birth-year.pipe';
 
 @NgModule({
   declarations: [
     CardComponent,
-    JoinPipe
+    JoinPipe,
+    BirthYearPipe
   ],
   imports: [
     CommonModule,

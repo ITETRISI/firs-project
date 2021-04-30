@@ -13,7 +13,6 @@ export class CompanyInfoTabShellComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
   
   ngOnInit(): void {
-   console.log(this.route)
    this.route.queryParams.subscribe(params => {
     this.paramsData = params;
     });
